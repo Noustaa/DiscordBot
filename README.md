@@ -1,0 +1,1 @@
+Discord Bot for a school project made with Python3.
