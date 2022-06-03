@@ -1,6 +1,9 @@
 import NoussBot
+from dotenv import load_dotenv
+import os
 
-bot = NoussBot.NoussBot()
-# noinspection SpellCheckingInspection
-bot.run("OTgxNTgxODE2Nzk0MzQ1NTAz.GaI47_.XeFPqQOicjylV0JogHOUX7HfnUbjgU78b4G3Gk")
-
+if __name__ == '__main__':
+    load_dotenv(dotenv_path="config")
+    bot = NoussBot.NoussBot()
+    # noinspection SpellCheckingInspection
+    bot.run(os.getenv("TOKEN"))
