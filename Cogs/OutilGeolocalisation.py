@@ -2,6 +2,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 import shodan
 import os
+import re
 
 
 class OutilGeolocalisation(commands.Cog):
@@ -11,6 +12,12 @@ class OutilGeolocalisation(commands.Cog):
 
     @commands.command(name="ip")
     async def run(self, ctx: commands.Context, hostname):
+        ipv4_validator = re.compile(r"^(?:25[0-5]|2[0-4]\d|[0-1]?\d{1,2})(?:\.(?:25[0-5]|2[0-4]\d|[0-1]?\d{1,2})){3}$")
+        if ipv4_validator.match(hostname):
+            print("ok")
+        else:
+            print("error")
+            return
         api = shodan.Shodan(os.getenv("SHODAN_API"))
         host = api.host(hostname)
         await ctx.channel.send(f"IP Address location: Longitude: {host['longitude']} & Latitude: {host['latitude']} \n"

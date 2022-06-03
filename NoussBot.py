@@ -17,12 +17,8 @@ class NoussBot(commands.Bot):
     async def on_message(self, message):
         if message.author == self.user:
             return
-
-        if message.content == "Ping":
-            await message.channel.send("Pong")
-
         await self.process_commands(message)
 
-    async def on_command_error(self, error, ctx):
+    async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
-            await self.send_message(ctx.message.channel, "No such command")
+            await ctx.channel.send("No such command")
